@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<esper-configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.espertech.com/schema/esper"
+                     xsi:schemaLocation="http://www.espertech.com/schema/esper/esper-configuration-4-0.xsd">
+
+    <auto-import import-name="com.cicc.strategyEngine.esper.annotation.*"/>
+    <auto-import import-name="java.lang.*"/>
+    <auto-import import-name="java.math.*"/>
+    <auto-import import-name="java.text.*"/>
+    <auto-import import-name="java.util.*"/>
+
+
+    <engine-settings>
+        <defaults>
+            <threading>
+                <internal-timer enabled="true" msec-resolution="1"/>
+                <insert-into-dispatch preserve-order="true" timeout-msec="5000" locking="spin"/>
+                <threading engine-fairlock="true"/>
+                <listener-dispatch preserve-order="true" timeout-msec="5000" locking="spin"/>
+            </threading>
+            <time-source>
+                <time-source-type value="nano"/>
+            </time-source>
+            <expression udf-cache="false"/>
+            <execution prioritized="true"/>
+            <expression math-context="precision=10 roundingMode=HALF_UP"/>
+        </defaults>
+    </engine-settings>
+
+</esper-configuration>
