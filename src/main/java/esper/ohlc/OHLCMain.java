@@ -34,6 +34,9 @@ public class OHLCMain {
         System.out.println("Setting up EPL");
 
         Configuration config = new Configuration();
+        // internalTimer就是System.currentTimeMillis()等jvm自带API, 可以设置为nanoTime
+        // internalTimer基于java.util.concurrent.ScheduledThreadPoolExecutor
+        // 14.8.2. Time Resolution and Time Unit提到，
         config.getEngineDefaults().getThreading().setInternalTimerEnabled(false);   // external timer for testing
         config.addEventType("OHLCTick", OHLCTick.class);
         config.addPlugInView("examples", "ohlcbarminute", OHLCBarPlugInViewFactory.class.getName());
@@ -115,7 +118,7 @@ public class OHLCMain {
         int min = Integer.parseInt(fields[1]);
         int sec = Integer.parseInt(fields[2]);
         Calendar cal = GregorianCalendar.getInstance();
-        cal.set(2008, 1, 1, hour, min, sec);
+        cal.set(2008, Calendar.FEBRUARY, 1, hour, min, sec);
         cal.set(Calendar.MILLISECOND, 0);
         return cal.getTimeInMillis();
     }
